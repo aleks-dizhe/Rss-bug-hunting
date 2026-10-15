@@ -12,10 +12,16 @@ let nextId = 1;
 
 function addTask() {
   const text = input.value;
-  errorEl.hidden = true;
-  tasks.push({ id: nextId++, text: text, done: false });
-  input.value = "";
-  render();
+  if (text.trim() === "") {
+    errorEl.hidden = false;
+    return;
+  } 
+    errorEl.hidden = true;
+    tasks.push({ id: nextId++, text: text, done: false });
+    input.value = "";
+    render();
+  
+  
 }
 
 function toggleTask(id) {
@@ -44,8 +50,12 @@ function updateCounter() {
 
 function render() {
   const visible = getVisibleTasks();
-  for (let i = 1; i <= visible.length; i++) {
+  console.log('visible:', visible);        // ← что в массиве
+  console.log('length:', visible.length);  // ← длина
+  for (let i = 0; i < visible.length; i++) {
+     console.log('i:', i);                  // ← текущий индекс
     const task = visible[i];
+    console.log('task:', task);            // ← что достали
     const li = document.createElement("li");
     li.className = "task";
     if (task.done) {
@@ -69,7 +79,7 @@ function render() {
   updateCounter();
 }
 
-addBtn.addEventListener("dblclick", addTask);
+addBtn.addEventListener("click", addTask);
 clearBtn.addEventListener("click", clearCompleted);
 
 filterButtons.forEach((btn) => {
