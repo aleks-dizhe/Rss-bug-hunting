@@ -48,7 +48,7 @@ function render() {
     const task = visible[i];
     const li = document.createElement("li");
     li.className = "task";
-    if (task.done) {
+    if (task) {
       li.classList.add("completed");
     }
 
@@ -69,7 +69,7 @@ function render() {
   updateCounter();
 }
 
-addBtn.addEventListener("dblclick", addTask);
+addBtn.addEventListener("click", addTask);
 clearBtn.addEventListener("click", clearCompleted);
 
 filterButtons.forEach((btn) => {
